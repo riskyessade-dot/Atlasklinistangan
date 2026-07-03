@@ -2,6 +2,7 @@
   "name": "atlasklinistangan",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "packageManager": "npm@9",
   "scripts": {
     "dev": "vite",
@@ -9,7 +10,7 @@
     "preview": "vite preview"
   },
   "engines": {
-    "node": ">=18 <21"
+    "node": "24.x"
   },
   "dependencies": {
     "react": "18.2.0",
