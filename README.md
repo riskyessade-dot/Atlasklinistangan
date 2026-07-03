@@ -27,3 +27,7 @@ Deploy to Vercel
 After deploy, Vercel will provide a live URL for your app.
 
 If you want, I can also add a GitHub Actions workflow or a Netlify config, or tweak the UI further.
+
+---
+
+Redeploy trigger: 2026-07-03T03:51:00Z — pushed by automation to retrigger Vercel build for CI troubleshooting.
