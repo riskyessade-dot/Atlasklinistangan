@@ -264,7 +264,105 @@ function AtlasKlinisTangan() {
 
   return (
     <div className="atlas-root">
-      <style>{`/* styles omitted for brevity (kept in App for full UI) */`}</style>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+        .atlas-root{
+          --paper:#E9EDEF; --ink:#17323F; --ink-soft:#3E5964; --teal:#0E7C86;
+          --line:#C3CED4; --card:#FDFDFB; --gold:#C79A3A;
+          font-family:'IBM Plex Sans',system-ui,sans-serif;
+          color:var(--ink); background:
+            radial-gradient(1200px 600px at 15% -10%, #F2F5F6 0%, transparent 60%),
+            var(--paper);
+          min-height:100vh; padding:28px 20px 40px; box-sizing:border-box;
+          -webkit-font-smoothing:antialiased;
+        }
+        .atlas-root *{box-sizing:border-box;}
+        .masthead{max-width:1120px;margin:0 auto 22px;}
+        .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.28em;
+          text-transform:uppercase;color:var(--teal);margin:0 0 8px;}
+        .title{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.4vw,46px);
+          line-height:1.02;margin:0;letter-spacing:-.01em;}
+        .title .amp{color:var(--gold);font-style:italic;}
+        .subtitle{margin:10px 0 0;color:var(--ink-soft);font-size:15px;max-width:60ch;}
+        .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px;}
+        .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;
+          text-transform:uppercase;border:1.5px solid var(--ink);background:transparent;
+          color:var(--ink);padding:10px 16px;border-radius:2px;cursor:pointer;
+          transition:all .16s ease;}
+        .btn:hover{background:var(--ink);color:var(--paper);}
+        .btn.primary{background:var(--teal);border-color:var(--teal);color:#fff;}
+        .btn.primary:hover{background:#0a636b;border-color:#0a636b;}
+        .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+        .score{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);
+          margin-left:auto;padding:8px 12px;border:1px dashed var(--line);border-radius:2px;}
+        .score b{color:var(--ink);}
+        .grid{max-width:1120px;margin:0 auto;display:grid;
+          grid-template-columns:minmax(0,0.92fr) minmax(0,1.08fr);gap:22px;align-items:start;}
+        @media (max-width:860px){.grid{grid-template-columns:1fr;}}
+        .plate{position:relative;background:var(--card);border:1px solid var(--line);
+          border-radius:4px;padding:14px 14px 8px;
+          box-shadow:0 1px 0 #fff inset, 0 18px 40px -28px rgba(23,50,63,.5);}
+        .plate::before{content:"";position:absolute;inset:7px;border:1px solid var(--line);
+          border-radius:2px;pointer-events:none;opacity:.55;}
+        .plate-tag{position:absolute;top:-11px;left:18px;background:var(--ink);color:var(--paper);
+          font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+          text-transform:uppercase;padding:5px 12px;border-radius:2px;}
+        .plate-view{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);
+          text-align:right;letter-spacing:.1em;padding:2px 6px 6px;}
+        .hand-svg{width:100%;height:auto;display:block;touch-action:manipulation;}
+        .pin{cursor:pointer;}
+        .pin-halo{fill:var(--teal);opacity:0;transition:opacity .18s;}
+        .pin-ring{fill:#fff;stroke:var(--ink);stroke-width:1.5;transition:all .18s;}
+        .pin-core{fill:var(--gold);transition:all .18s;}
+        .pin-num{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;
+          fill:var(--ink);pointer-events:none;}
+        .pin:hover .pin-halo{opacity:.16;}
+        .pin:hover .pin-core{fill:var(--teal);}
+        .pin:focus-visible{outline:none;}
+        .pin:focus-visible .pin-halo{opacity:.22;}
+        .pin-active .pin-halo{opacity:.2;}
+        .pin-active .pin-ring{stroke:var(--teal);stroke-width:2.5;}
+        .pin-active .pin-core{fill:var(--teal);}
+        .pin-reveal .pin-ring{stroke:#1F8A5B;stroke-width:2.5;}
+        .pin-reveal .pin-core{fill:#1F8A5B;}
+        .panel{background:var(--card);border:1px solid var(--line);border-radius:4px;
+          padding:0;overflow:hidden;max-height:640px;display:flex;flex-direction:column;}
+        .panel-scroll{overflow-y:auto;padding:22px 24px 26px;}
+        .panel-scroll::-webkit-scrollbar{width:9px;}
+        .panel-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px;}
+        .cond-index{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);
+          letter-spacing:.12em;}
+        .cond-name{font-family:'Fraunces',serif;font-weight:600;font-size:28px;line-height:1.05;
+          margin:4px 0 3px;letter-spacing:-.01em;}
+        .cond-loc{font-size:13px;color:var(--ink-soft);margin:0 0 14px;
+          font-family:'IBM Plex Mono',monospace;letter-spacing:.02em;}
+        .scope-band{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;
+          font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+          padding:7px 12px;border-radius:2px;margin-bottom:20px;}
+        .scope-dot{width:8px;height:8px;border-radius:50%;}
+        .sec{margin:0 0 16px;}
+        .sec-h{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+          text-transform:uppercase;color:var(--ink-soft);margin:0 0 6px;
+          padding-bottom:5px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;}
+        .sec-h .n{color:var(--gold);}
+        .sec-b{font-size:14.5px;line-height:1.62;color:#243b44;margin:0;}
+        .sec.rujuk .sec-b{background:#FBF0EC;border-left:3px solid #B23B2E;padding:11px 13px;border-radius:2px;}
+        .sec.rujuk .sec-h{color:#B23B2E;border-color:#EBD2CB;}
+        .quiz-card{padding:22px 24px 26px;}
+        .quiz-kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+          text-transform:uppercase;color:var(--teal);margin:0 0 12px;}
+        .quiz-q{font-family:'Fraunces',serif;font-size:20px;line-height:1.3;margin:0 0 6px;font-weight:600;}
+        .quiz-signs{font-size:14.5px;line-height:1.6;color:#243b44;background:#F1F5F6;
+          border:1px solid var(--line);border-radius:3px;padding:14px 16px;margin:14px 0 18px;}
+        .quiz-hint{font-size:13px;color:var(--ink-soft);margin:0 0 4px;}
+        .fb{border-radius:3px;padding:14px 16px;margin-top:16px;font-size:14.5px;line-height:1.55;}
+        .fb.ok{background:#E4F3EA;border:1px solid #A9D9BE;color:#1a6b45;}
+        .fb.no{background:#FBEBE7;border:1px solid #E7C0B6;color:#9c3326;}
+        .fb b{font-family:'Fraunces',serif;}
+        .footer{max-width:1120px;margin:26px auto 0;padding-top:16px;border-top:1px solid var(--line);
+          font-size:12px;line-height:1.6;color:var(--ink-soft);}
+        .footer b{color:var(--ink);}
+      `}</style>
 
       <header className="masthead">
         <p className="eyebrow">Referensi Apoteker · Kondisi Tangan</p>
